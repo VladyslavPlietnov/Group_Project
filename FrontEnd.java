@@ -1,5 +1,6 @@
 package org.example.FrontEnd;
 import org.example.GameBody.GameBody;
+import org.example.Parser.CityParser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class FrontEnd implements ActionListener {
       JFrame frame;
@@ -34,7 +36,6 @@ public class FrontEnd implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if(textField==null){
             if(gamerCount==0){
                 firstPage();
@@ -50,27 +51,55 @@ public class FrontEnd implements ActionListener {
                 if (input.equals("здаюсь")) {
                     losingPage();
                 }
-                else if(input.charAt(0) != city.charAt(city.length()-1)){
+                else if( gamerCount !=0 && !String.valueOf(input.charAt(0)).equals(findLast(city))){
                     brokenRules();
                 }
                 else {
-
-                    String lastLetter;
-                    if (input.charAt(input.length() - 1) == 'ь' || input.charAt(input.length() - 1) == 'и') {
-                        lastLetter = String.valueOf(input.charAt(input.length() - 2));
-                    } else {
-                        lastLetter = String.valueOf(input.charAt(input.length() - 1));
+                     if(listOfCities.contains(input)){
+                         usedCity();
+                     } else if (!GameBody.gameBody().getAllCities().contains(input)) {
+                         unknownCity();
+                     }
+                    else{
+                        String lastLetter = findLast(input);
+                        GameBody.gameBody().setLastLetter(lastLetter);
+                        gamerCount++;
+                        listOfCities.add(input);
+                        continuePage();
                     }
-                    GameBody.gameBody().setLastLetter(lastLetter);
-                    gamerCount ++;
-                    listOfCities.add(input);
-                    //GameBody.gameBody().setUsedList(listOfCities);
-                    continuePage();
                 }
             } else {
                 noCityPage();
             }
         }
+    }
+    public void usedCity(){
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        frame = new JFrame("Гра в мітса");
+        JLabel label = new JLabel("Вибачте, це місто вже було використано \n"+ "Будь ласка, введіть інше місто");
+        textField= new JTextField();
+        JButton button = new JButton("Зробити хід");
+        button.addActionListener(this);
+        frame.add(label, BorderLayout.NORTH);
+        frame.add(textField, BorderLayout.CENTER);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.setSize(400, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+    public void unknownCity(){
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        frame = new JFrame("Гра в мітса");
+        JLabel label = new JLabel("Вибачте, я не знаю такого міста \n"+ "Будь ласка, введіть інше місто");
+        textField= new JTextField();
+        JButton button = new JButton("Зробити хід");
+        button.addActionListener(this);
+        frame.add(label, BorderLayout.NORTH);
+        frame.add(textField, BorderLayout.CENTER);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.setSize(400, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public void losingPage(){
@@ -102,7 +131,7 @@ public class FrontEnd implements ActionListener {
         computerCount++;
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
-        JLabel label = new JLabel("Комп'ютер: "+ city+"\n Введіть наступну назву міста");
+        JLabel label = new JLabel("Комп'ютер: "+ city+"; Рахунок (комп'ютер:гравець) --" +computerCount+ ":"+gamerCount);
         textField= new JTextField();
         JButton button = new JButton("Зробити хід");
         button.addActionListener(this);
@@ -144,8 +173,20 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-      new FrontEnd();
+    public String findLast(String city){
+        String lastLetter;
+        if (city.charAt(city.length() - 1) == 'ь' || city.charAt(city.length() - 1) == 'и') {
+            lastLetter = String.valueOf(city.charAt(city.length() - 2));
+        } else {
+            lastLetter = String.valueOf(city.charAt(city.length() - 1));
+        }
+        return lastLetter;
+    }
 
+    public static void main(String[] args) {
+        Set<String> citySet =new CityParser().parseCities() ;
+
+        GameBody.gameBody().setAllCities(citySet);
+      new FrontEnd();
     }
 }
