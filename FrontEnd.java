@@ -27,6 +27,7 @@ public class FrontEnd implements ActionListener {
         JPanel panelWest = new JPanel();
         frame.add(panelEast, BorderLayout.EAST);
         frame.add(panelWest, BorderLayout.WEST);
+        frame.setLocationRelativeTo(null);
        frame.setVisible(true);
 
     }
@@ -35,7 +36,12 @@ public class FrontEnd implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(textField==null){
-            continuePage();
+            if(gamerCount==0){
+                firstPage();
+            }
+            else{
+                continuePage();
+            }
         }
         else{
             String input = textField.getText().strip().toLowerCase();
@@ -73,6 +79,21 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Ви програли, сподіваюсь вам сподобалось!");
         frame.add(label, BorderLayout.CENTER);
         frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+    public void firstPage(){
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        frame = new JFrame("Гра в міста");
+        JLabel label = new JLabel("Введіть наступну назву міста");
+        textField= new JTextField();
+        JButton button = new JButton("Зробити хід");
+        button.addActionListener(this);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.add(textField, BorderLayout.CENTER);
+        frame.add(label, BorderLayout.NORTH);
+        frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -89,6 +110,7 @@ public class FrontEnd implements ActionListener {
         frame.add(textField, BorderLayout.CENTER);
         frame.add(label, BorderLayout.NORTH);
         frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -103,6 +125,7 @@ public class FrontEnd implements ActionListener {
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
         frame.setSize(400, 500);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -117,6 +140,7 @@ public class FrontEnd implements ActionListener {
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
         frame.setSize(400, 500);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
