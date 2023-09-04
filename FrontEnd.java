@@ -10,29 +10,28 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Set;
 
-public void continuePage(){
-        String city = GameBody.gameBody().makeMove();
-        city = capitalizeFirstLetter(city);  
-        computerCount++;
-        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-        frame = new JFrame("Гра в міста");
-        JLabel label = new JLabel("Комп'ютер: "+ city + "; Рахунок (комп'ютер:гравець) --" + computerCount + ":" + gamerCount);
-        textField = new JTextField();
-        JButton button = new JButton("Зробити хід");
-        button.addActionListener(this);
-        frame.add(button, BorderLayout.SOUTH);
-        frame.add(textField, BorderLayout.CENTER);
-        frame.add(label, BorderLayout.NORTH);
-        frame.setSize(400, 400);
+public class FrontEnd implements ActionListener {
+      JFrame frame;
+    JTextField textField;
+    public static ArrayList<String> listOfCities = new ArrayList<>();
+    int gamerCount =0;
+    int computerCount = 0;
+    public FrontEnd() {
+       frame = new JFrame("Гра в мітса");
+       frame.setSize(300,150);
+        frame.setLayout(new BorderLayout(300, 150));
+        JLabel label = new JLabel("Вітаємо в грі в міста, бажаємо успіху!");
+       frame.add(label, BorderLayout.NORTH);
+       JButton button = new JButton("Старт");
+       button.addActionListener(this);
+       frame.add(button, BorderLayout.SOUTH);
+       JPanel panelEast = new JPanel();
+        JPanel panelWest = new JPanel();
+        frame.add(panelEast, BorderLayout.EAST);
+        frame.add(panelWest, BorderLayout.WEST);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-public String capitalizeFirstLetter(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
-        } else {
-            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
-        }
+       frame.setVisible(true);
+
     }
 
     @Override
@@ -45,27 +44,25 @@ public String capitalizeFirstLetter(String str) {
                 continuePage();
             }
         }
-        else{
+        else {
             String input = textField.getText().strip().toLowerCase();
-            String city = GameBody.gameBody().getCity();
+            String normalizedInput = input.replace(" ", "");
+
             if (!input.isBlank()) {
                 if (input.equals("здаюсь")) {
                     losingPage();
-                }
-                else if( gamerCount !=0 && !String.valueOf(input.charAt(0)).equals(findLast(city))){
+                } else if (gamerCount != 0 && !String.valueOf(input.charAt(0)).equals(findLast(GameBody.gameBody().getCity()))) {
                     brokenRules();
-                }
-                else {
-                     if(listOfCities.contains(input)){
-                         usedCity();
-                     } else if (!GameBody.gameBody().getAllCities().contains(input)) {
-                         unknownCity();
-                     }
-                    else{
+                } else {
+                    if (listOfCities.contains(normalizedInput)) {
+                        usedCity();
+                    } else if (!GameBody.gameBody().getAllCities().contains(normalizedInput)) {
+                        unknownCity();
+                    } else {
                         String lastLetter = findLast(input);
                         GameBody.gameBody().setLastLetter(lastLetter);
                         gamerCount++;
-                        listOfCities.add(input);
+                        listOfCities.add(normalizedInput);
                         continuePage();
                     }
                 }
@@ -74,6 +71,7 @@ public String capitalizeFirstLetter(String str) {
             }
         }
     }
+
     public void usedCity(){
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
@@ -84,7 +82,7 @@ public String capitalizeFirstLetter(String str) {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -98,7 +96,7 @@ public String capitalizeFirstLetter(String str) {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -108,7 +106,7 @@ public String capitalizeFirstLetter(String str) {
         frame = new JFrame("Кінець");
         JLabel label = new JLabel("Ви програли, сподіваюсь вам сподобалось!");
         frame.add(label, BorderLayout.CENTER);
-        frame.setSize(400, 400);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -122,26 +120,35 @@ public String capitalizeFirstLetter(String str) {
         frame.add(button, BorderLayout.SOUTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(label, BorderLayout.NORTH);
-        frame.setSize(400, 400);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public void continuePage(){
         String city = GameBody.gameBody().makeMove();
+        city = capitalizeFirstLetter(city);  // додатковий рядок коду
         computerCount++;
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
-        JLabel label = new JLabel("Комп'ютер: "+ city+"; Рахунок (комп'ютер:гравець) --" +computerCount+ ":"+gamerCount);
-        textField= new JTextField();
+        JLabel label = new JLabel("Комп'ютер: "+ city + "; Рахунок (комп'ютер:гравець) --" + computerCount + ":" + gamerCount);
+        textField = new JTextField();
         JButton button = new JButton("Зробити хід");
         button.addActionListener(this);
         frame.add(button, BorderLayout.SOUTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(label, BorderLayout.NORTH);
-        frame.setSize(400, 400);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public String capitalizeFirstLetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        }
     }
 
     public void noCityPage(){
@@ -154,7 +161,7 @@ public String capitalizeFirstLetter(String str) {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -169,7 +176,7 @@ public String capitalizeFirstLetter(String str) {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(200, 50);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
