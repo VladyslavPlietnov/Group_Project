@@ -10,28 +10,29 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class FrontEnd implements ActionListener {
-      JFrame frame;
-    JTextField textField;
-    public static ArrayList<String> listOfCities = new ArrayList<>();
-    int gamerCount =0;
-    int computerCount = 0;
-    public FrontEnd() {
-       frame = new JFrame("Гра в мітса");
-       frame.setSize(400,100);
-        frame.setLayout(new BorderLayout(40, 30));
-        JLabel label = new JLabel("Вітаємо в грі в міста, бажаємо успіху!");
-       frame.add(label, BorderLayout.NORTH);
-       JButton button = new JButton("Старт");
-       button.addActionListener(this);
-       frame.add(button, BorderLayout.SOUTH);
-       JPanel panelEast = new JPanel();
-        JPanel panelWest = new JPanel();
-        frame.add(panelEast, BorderLayout.EAST);
-        frame.add(panelWest, BorderLayout.WEST);
+public void continuePage(){
+        String city = GameBody.gameBody().makeMove();
+        city = capitalizeFirstLetter(city);  
+        computerCount++;
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        frame = new JFrame("Гра в міста");
+        JLabel label = new JLabel("Комп'ютер: "+ city + "; Рахунок (комп'ютер:гравець) --" + computerCount + ":" + gamerCount);
+        textField = new JTextField();
+        JButton button = new JButton("Зробити хід");
+        button.addActionListener(this);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.add(textField, BorderLayout.CENTER);
+        frame.add(label, BorderLayout.NORTH);
+        frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
-       frame.setVisible(true);
-
+        frame.setVisible(true);
+    }
+public String capitalizeFirstLetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        }
     }
 
     @Override
