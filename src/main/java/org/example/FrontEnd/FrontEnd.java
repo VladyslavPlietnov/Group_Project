@@ -22,7 +22,7 @@ public class FrontEnd implements ActionListener {
         frame = new JFrame("Гра в мітса");
         frame.setSize(400, 100);
         frame.setLayout(new BorderLayout(40, 30));
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Вітаємо в грі в міста, бажаємо успіху!");
         label.setFont(defaultFont);
@@ -78,7 +78,7 @@ public class FrontEnd implements ActionListener {
     public void usedCity() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Вибачте, це місто вже було використано \n" + "Будь ласка, введіть інше місто");
         textField = new JTextField();
@@ -100,7 +100,7 @@ public class FrontEnd implements ActionListener {
     public void unknownCity() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Вибачте, я не знаю такого міста \n" + "Будь ласка, введіть інше місто");
         textField = new JTextField();
@@ -121,7 +121,7 @@ public class FrontEnd implements ActionListener {
     public void losingPage() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Кінець");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Ви програли, сподіваюсь вам сподобалось!");
         label.setFont(defaultFont);
@@ -134,7 +134,7 @@ public class FrontEnd implements ActionListener {
     public void firstPage() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Введіть перше місто!");
         textField = new JTextField();
@@ -159,7 +159,7 @@ public class FrontEnd implements ActionListener {
         computerCount++;
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Комп'ютер: " + city + "; Рахунок (комп'ютер:гравець) --" + computerCount + ":" + gamerCount);
         textField = new JTextField();
@@ -187,7 +187,7 @@ public class FrontEnd implements ActionListener {
     public void computerLost() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Кінець");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Вітаю, ви виграли! Сподіваюсь вам сподобалось!");
         label.setFont(defaultFont);
@@ -200,7 +200,7 @@ public class FrontEnd implements ActionListener {
     public void noCityPage() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Ви не ввели місто!");
         textField = new JTextField();
@@ -221,7 +221,7 @@ public class FrontEnd implements ActionListener {
     public void brokenRules() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
-        Image icon = Toolkit.getDefaultToolkit().getImage("D:\\icon.png.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
         JLabel label = new JLabel("Ви порушили правила, місто повинно починатись з \n" +
                 "останньої літери попереднього ходу");
