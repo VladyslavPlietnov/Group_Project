@@ -11,16 +11,20 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class FrontEnd implements ActionListener {
+    private static final int HEIGHT_FIRST = 100;
+    private static final int HEIGHT_REGULAR = 500;
+    private static final int WIDTH = 400;
+    private static final int LETTER_SIZE = 18;
     JFrame frame;
     JTextField textField;
     public static ArrayList<String> listOfCities = new ArrayList<>();
     int gamerCount = 0;
     int computerCount = 0;
-    Font defaultFont = new Font("Arial", Font.PLAIN, 18);
+    Font defaultFont = new Font("Arial", Font.PLAIN, LETTER_SIZE);
 
     public FrontEnd() {
         frame = new JFrame("Гра в мітса");
-        frame.setSize(400, 100);
+        frame.setSize(WIDTH, HEIGHT_FIRST);
         frame.setLayout(new BorderLayout(40, 30));
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
         frame.setIconImage(icon);
@@ -37,7 +41,6 @@ public class FrontEnd implements ActionListener {
         frame.add(panelWest, BorderLayout.WEST);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
 
     @Override
@@ -76,6 +79,7 @@ public class FrontEnd implements ActionListener {
     }
 
     public void usedCity() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -86,18 +90,20 @@ public class FrontEnd implements ActionListener {
         label.setFont(defaultFont);
         textField.setFont(defaultFont);
         button.setFont(defaultFont);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));
         button.setBackground(Color.RED);
         button.addActionListener(this);
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void unknownCity() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -110,15 +116,17 @@ public class FrontEnd implements ActionListener {
         frame.add(label, BorderLayout.NORTH);
         label.setFont(defaultFont);
         textField.setFont(defaultFont);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void losingPage() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Кінець");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -126,12 +134,14 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Ви програли, сподіваюсь вам сподобалось!");
         label.setFont(defaultFont);
         frame.add(label, BorderLayout.CENTER);
-        frame.setSize(400, 400);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void firstPage() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -139,7 +149,7 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Введіть перше місто!");
         textField = new JTextField();
         JButton button = new JButton("Зробити хід");
-        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));
         button.setBackground(Color.GREEN);
         button.addActionListener(this);
         label.setFont(defaultFont);
@@ -147,9 +157,10 @@ public class FrontEnd implements ActionListener {
         frame.add(button, BorderLayout.SOUTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(label, BorderLayout.NORTH);
-        frame.setSize(400, 400);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void continuePage() {
@@ -157,6 +168,7 @@ public class FrontEnd implements ActionListener {
         if (city.equals("здаюсь")) computerLost();
         city = capitalizeFirstLetter(city);
         computerCount++;
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в міста");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -164,7 +176,7 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Комп'ютер: " + city + "; Рахунок (комп'ютер:гравець) --" + computerCount + ":" + gamerCount);
         textField = new JTextField();
         JButton button = new JButton("Зробити хід");
-        button.setFont(new Font("Arial", Font.BOLD, 18));  // Жирний шрифт для кнопки
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));  // Жирний шрифт для кнопки
         button.setBackground(Color.GREEN);
         button.addActionListener(this);
         label.setFont(defaultFont);
@@ -172,9 +184,10 @@ public class FrontEnd implements ActionListener {
         frame.add(button, BorderLayout.SOUTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(label, BorderLayout.NORTH);
-        frame.setSize(400, 400);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public String capitalizeFirstLetter(String str) {
         if (str == null || str.isEmpty()) {
@@ -185,6 +198,7 @@ public class FrontEnd implements ActionListener {
     }
 
     public void computerLost() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Кінець");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -192,12 +206,14 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Вітаю, ви виграли! Сподіваюсь вам сподобалось!");
         label.setFont(defaultFont);
         frame.add(label, BorderLayout.CENTER);
-        frame.setSize(400, 400);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void noCityPage() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -205,7 +221,7 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Ви не ввели місто!");
         textField = new JTextField();
         JButton button = new JButton("Зробити хід");
-        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));
         button.setBackground(Color.RED);
         button.addActionListener(this);
         label.setFont(defaultFont);
@@ -213,12 +229,14 @@ public class FrontEnd implements ActionListener {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public void brokenRules() {
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         frame = new JFrame("Гра в мітса");
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
@@ -226,7 +244,7 @@ public class FrontEnd implements ActionListener {
         JLabel label = new JLabel("Ви порушили правила, місто повинно починатись з \n" +
                 "останньої літери попереднього ходу");
         JButton button = new JButton("Зробити хід");
-        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFont(new Font("Arial", Font.BOLD, LETTER_SIZE));
         button.setBackground(Color.RED);
         button.addActionListener(this);
         label.setFont(defaultFont);
@@ -234,9 +252,10 @@ public class FrontEnd implements ActionListener {
         frame.add(label, BorderLayout.NORTH);
         frame.add(textField, BorderLayout.CENTER);
         frame.add(button, BorderLayout.SOUTH);
-        frame.setSize(400, 500);
+        frame.setSize(WIDTH, HEIGHT_REGULAR);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public String findLast(String city) {
