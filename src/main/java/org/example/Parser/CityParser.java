@@ -26,7 +26,7 @@ public class CityParser {
                     Elements tds = row.select("td");
                     if (tds.size() > 1) {
                         String cityName = tds.get(1).text();
-                        cityName = cityName.replaceAll("[^а-яА-ЯїЇіІєЄ]+", "");  // очищаємо назву від всіх символів, крім українських букв
+                        cityName = cityName.replaceAll("[^а-яА-ЯїЇіІєЄ]+", "");
                         cities.add(cityName);
                     }
                 }
