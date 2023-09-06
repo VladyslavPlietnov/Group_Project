@@ -1,15 +1,11 @@
 package org.example.FrontEnd;
-
 import org.example.GameBody.GameBody;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
 public class FrontEnd implements ActionListener {
     private static final int HEIGHT_FIRST = 100;
     private static final int HEIGHT_REGULAR = 500;
@@ -21,7 +17,6 @@ public class FrontEnd implements ActionListener {
     int gamerCount = 0;
     int computerCount = 0;
     Font defaultFont = new Font("Arial", Font.PLAIN, LETTER_SIZE);
-
     public FrontEnd() {
         frame = new JFrame("Гра в мітса");
         frame.setSize(WIDTH, HEIGHT_FIRST);
@@ -42,7 +37,6 @@ public class FrontEnd implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (textField == null) {
@@ -77,7 +71,6 @@ public class FrontEnd implements ActionListener {
             }
         }
     }
-
     public void usedCity() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -101,7 +94,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void unknownCity() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -124,7 +116,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void losingPage() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -139,7 +130,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void firstPage() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -162,7 +152,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void continuePage() {
         String city = GameBody.gameBody().makeMove();
         if (city.equals("здаюсь")) computerLost();
@@ -196,7 +185,6 @@ public class FrontEnd implements ActionListener {
             return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         }
     }
-
     public void computerLost() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -211,7 +199,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void noCityPage() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -234,7 +221,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public void brokenRules() {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -257,7 +243,6 @@ public class FrontEnd implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
     public String findLast(String city) {
         String lastLetter;
         if (city.charAt(city.length() - 1) == 'ь' || city.charAt(city.length() - 1) == 'и') {
@@ -267,5 +252,4 @@ public class FrontEnd implements ActionListener {
         }
         return lastLetter;
     }
-
 }
